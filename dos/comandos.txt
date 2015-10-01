@@ -1,0 +1,16 @@
+// limpiar pantalla 
+cls
+// mostar el contendio del directorio
+dir
+//moverse entre los directorios 
+
+// retroceder
+cd..
+// retroceder hasta el path c:
+cd\
+//movernos entre carpetas
+cd nombrecarpeta
+
+// movernos a una ruta completa
+cd nombrede la ruta
+
