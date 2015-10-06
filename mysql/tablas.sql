@@ -1,4 +1,6 @@
 -- CREACON DE TABLAS
+-- DDL create table, alter table, drop table y describe table
+
 
 create schema ejemplo2;
 
@@ -104,7 +106,7 @@ NUM_SER integer(2) primary key
 );
 
 CREATE TABLE ejemplo2.EMPLEADOS2 (
-    NUM_EMPLEADO INTEGER(4) ,
+    NUM_EMPLEADO INTEGER(4) comment 'fasdfadsfasdf',
     NOMBRE VARCHAR(30),
     PUESTO VARCHAR(15),
     JEFE INTEGER(4),
@@ -112,6 +114,7 @@ CREATE TABLE ejemplo2.EMPLEADOS2 (
     SALARIO FLOAT(7 , 2 ),
     COMISION FLOAT(7 , 2 ),
     NUM_SERVICIO INTEGER(2),
+    constraint FK_SERVICIOS2_EMPLEADOS2
     FOREIGN KEY (NUM_SERVICIO)
         REFERENCES ejemplo2.SERVICIOS2 (NUM_SER),
         PRIMARY KEY(NUM_EMPLEADO, NUM_SERVICIO)
@@ -125,6 +128,98 @@ create table ejemplo2.ejemplo12(
     check(campo2>200) -- no sirve en mysql http://stackoverflow.com/questions/2115497/check-constraint-in-mysql-is-not-working
     -- se reemplaza con un trigger
 );
+
+-- cuando la tabla tienen una llave foranea compuesta
+
+create table ejemplo2.servicios3(
+NUM_SER integer(2),
+CODIGO_SER VARCHAR(10),
+ primary key(NUM_SER, CODIGO_SER)
+);
+
+CREATE TABLE ejemplo2.EMPLEADOS3 (
+    NUM_EMPLEADO INTEGER(4) comment 'fasdfadsfasdf',
+    NOMBRE VARCHAR(30),
+    PUESTO VARCHAR(15),
+    JEFE INTEGER(4),
+    FECH_CONTRAT DATE,
+    SALARIO FLOAT(7 , 2 ),
+    COMISION FLOAT(7 , 2 ),
+    SERVICIOS3_NUM_SERVICIO INTEGER(2),
+    SERVICIOS3_CODIGO_SER VARCHAR(10),
+    constraint FK_SERVICIOS2_EMPLEADOS2
+    FOREIGN KEY (SERVICIOS3_NUM_SERVICIO, SERVICIOS3_CODIGO_SER)
+        REFERENCES ejemplo2.SERVICIOS3 (NUM_SER, CODIGO_SER),
+        PRIMARY KEY(SERVICIOS3_NUM_SERVICIO, SERVICIOS3_CODIGO_SER) 
+);
+
+-- cuando creo una llave primaria con nombre
+
+create table ejemplo2.servicios4(
+NUM_SER integer(2),
+CODIGO_SER VARCHAR(10),
+constraint ASDFASD -- no sirve con esta version de mysql
+ primary key(NUM_SER, CODIGO_SER)
+);
+
+
+-- MODIFICACION DE TABLAS
+
+-- el comando para modificar tablas es el alter table
+
+-- agregar un campo
+
+alter table ejemplo2.servicios4 add column jaja varchar(5);
+alter table ejemplo2.servicios4 add column jaja2 varchar(5) first;
+alter table ejemplo2.servicios4 add column jaja3 varchar(5) after num_ser;
+alter table ejemplo2.servicios4 add index IDX_SERVICIOS4_JAJA3 (jaja3);
+ALTER TABLE ejemplo2.servicios4 
+CHANGE COLUMN jaja2 jaja2 VARCHAR(5) NOT NULL ,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (NUM_SER, CODIGO_SER, jaja2);
+
+ALTER TABLE ejemplo2.empleados3 
+DROP FOREIGN KEY FK_SERVICIOS2_EMPLEADOS2;
+
+ALTER TABLE `ejemplo2`.`empleados3` 
+ADD CONSTRAINT `FK_SERVICIOS2_EMPLEADOS2`
+  FOREIGN KEY (`SERVICIOS3_NUM_SERVICIO` , `SERVICIOS3_CODIGO_SER` , `SERVICIOS3_SERV`)
+  REFERENCES `ejemplo2`.`servicios3` (`NUM_SER` , `CODIGO_SER` , `SERV`
+  );
+  
+  ALTER TABLE ejemplo2.servicios4 
+CHANGE COLUMN jaja2 jajaJAJAJA2 VARCHAR(5) NOT NULL;
+
+ALTER TABLE ejemplo2.empleados3 
+CHANGE COLUMN SALARIO SALARIO FLOAT(7,2) NULL DEFAULT NULL AFTER NUM_EMPLEADO;
+
+-- DESCRIBIR LA TABLA
+DESCRIBE ejemplo2.empleados3;
+
+-- desactivar la integridad referencial
+
+alter table ejemplo2.servicios3 disable keys;
+alter table ejemplo2.empleados3 disable keys;
+
+	
+drop table ejemplo2.empleados3;
+
+drop table ejemplo2.servicios3;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
