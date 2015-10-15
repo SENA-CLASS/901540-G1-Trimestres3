@@ -54,3 +54,43 @@ create table ejemplo.ejemplo3 (
 
 -- LOS TIPOS DE DATOS TEMPORALES----------------------------------------------------------------------
 
+create table ejemplo.ejemplo4 (
+	campo1 date not null primary key,
+    campo2 datetime,
+    campo3 timestamp,
+    campo4 time,
+    campo5 year
+    
+	-- falta llave primaria para poder insertar datos
+);
+
+-- LOS TIPOS DE DATOS CADENA DE CARACTERES----------------------------------------------------------------------
+-- el tamaño es de 255
+create table ejemplo.ejemplo5 (
+	CAMPO1 char not null primary key,
+    campo2 varchar(10),
+    campo3 TINYBLOB,
+    campo4 TINYTEXT,
+    
+    campo5 char(2)
+	-- falta llave primaria para poder insertar datos
+);
+
+-- mayores de 255 hasta 
+create table ejemplo.ejemplo6 (
+	llave int not null primary key,
+	CAMPO1 text,
+    campo2 blob,
+    campo3 	mediumblob,
+    campo4 mediumtext,
+    
+    campo5 longblob,
+    campo6 longtext,
+    campo7 enum('Femenino','Masculino'),
+    campo8 set('sfdasdfasdf','asdfadfasdf','asdfasdfasdfasd')
+    
+	-- falta llave primaria para poder insertar datos
+);
+
+
+
