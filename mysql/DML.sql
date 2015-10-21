@@ -218,6 +218,13 @@ on t1.PEDIDO_FACTURA_ID_FACTURA= t2.PEDIDO_FACTURA_ID_FACTURA and t1.PRODUCTO_ID
 set t1.costo_Total= (t2.COSTO_UNITARIO*t2.CANTIDAD)
 where  t1.PEDIDO_FACTURA_ID_FACTURA=1 and t1.PRODUCTO_ID_PRODUCTO=2;
 -- 
-    
-    
 
+SELECT NOW() FROM DUAL;
+SELECT CURDATE();
+
+select DATE_FORMAT(f.FECHA_FACTURA, '%W %d %M %Y %H:%i:%s') from tienda_online2.factura f;
+
+select dayname(f.FECHA_FACTURA) from tienda_online2.factura f;
+
+
+select DATE_FORMAT(f.FECHA_FACTURA, GET_FORMAT(DATE, 'EUR')) from tienda_online2.factura f;
