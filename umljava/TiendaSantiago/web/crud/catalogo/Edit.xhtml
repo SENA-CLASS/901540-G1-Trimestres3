@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CatalogoEditDlg" widgetVar="CatalogoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCatalogoTitle}">
+            <h:form id="CatalogoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{catalogoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCatalogoLabel_idCatalogo}" for="idCatalogo" />
+                        <p:inputText id="idCatalogo" value="#{catalogoController.selected.idCatalogo}" title="#{bundle.EditCatalogoTitle_idCatalogo}" required="true" requiredMessage="#{bundle.EditCatalogoRequiredMessage_idCatalogo}"/>
+                        <p:outputLabel value="#{bundle.EditCatalogoLabel_nombreCatalogo}" for="nombreCatalogo" />
+                        <p:inputText id="nombreCatalogo" value="#{catalogoController.selected.nombreCatalogo}" title="#{bundle.EditCatalogoTitle_nombreCatalogo}" required="true" requiredMessage="#{bundle.EditCatalogoRequiredMessage_nombreCatalogo}"/>
+                        <p:outputLabel value="#{bundle.EditCatalogoLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{catalogoController.selected.descripcion}" title="#{bundle.EditCatalogoTitle_descripcion}" required="true" requiredMessage="#{bundle.EditCatalogoRequiredMessage_descripcion}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{catalogoController.update}" value="#{bundle.Save}" update="display,:CatalogoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CatalogoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CatalogoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

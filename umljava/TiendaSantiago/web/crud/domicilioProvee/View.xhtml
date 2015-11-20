@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DomicilioProveeViewDlg" widgetVar="DomicilioProveeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDomicilioProveeTitle}">
+            <h:form id="DomicilioProveeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{domicilioProveeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDomicilioProveeLabel_direccion}"/>
+                        <h:outputText value="#{domicilioProveeController.selected.direccion}" title="#{bundle.ViewDomicilioProveeTitle_direccion}"/>
+                        <h:outputText value="#{bundle.ViewDomicilioProveeLabel_telefono}"/>
+                        <h:outputText value="#{domicilioProveeController.selected.telefono}" title="#{bundle.ViewDomicilioProveeTitle_telefono}"/>
+                        <h:outputText value="#{bundle.ViewDomicilioProveeLabel_barrio}"/>
+                        <h:outputText value="#{domicilioProveeController.selected.barrio}" title="#{bundle.ViewDomicilioProveeTitle_barrio}"/>
+                        <h:outputText value="#{bundle.ViewDomicilioProveeLabel_localidad}"/>
+                        <h:outputText value="#{domicilioProveeController.selected.localidad}" title="#{bundle.ViewDomicilioProveeTitle_localidad}"/>
+                        <h:outputText value="#{bundle.ViewDomicilioProveeLabel_correoPostal}"/>
+                        <h:outputText value="#{domicilioProveeController.selected.correoPostal}" title="#{bundle.ViewDomicilioProveeTitle_correoPostal}"/>
+                        <h:outputText value="#{bundle.ViewDomicilioProveeLabel_municipioIdMunicipio}"/>
+                        <h:outputText value="#{domicilioProveeController.selected.municipioIdMunicipio}" title="#{bundle.ViewDomicilioProveeTitle_municipioIdMunicipio}"/>
+                        <h:outputText value="#{bundle.ViewDomicilioProveeLabel_proveedor}"/>
+                        <h:outputText value="#{domicilioProveeController.selected.proveedor}" title="#{bundle.ViewDomicilioProveeTitle_proveedor}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DomicilioProveeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

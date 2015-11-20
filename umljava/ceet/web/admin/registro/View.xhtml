@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RegistroViewDlg" widgetVar="RegistroViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewRegistroTitle}">
+            <h:form id="RegistroViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{registroController.selected != null}">
+                        <h:outputText value="#{bundle.ViewRegistroLabel_idRegistro}"/>
+                        <h:outputText value="#{registroController.selected.idRegistro}" title="#{bundle.ViewRegistroTitle_idRegistro}"/>
+                        <h:outputText value="#{bundle.ViewRegistroLabel_fechaIngreso}"/>
+                        <h:outputText value="#{registroController.selected.fechaIngreso}" title="#{bundle.ViewRegistroTitle_fechaIngreso}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewRegistroLabel_fehcaSalida}"/>
+                        <h:outputText value="#{registroController.selected.fehcaSalida}" title="#{bundle.ViewRegistroTitle_fehcaSalida}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewRegistroLabel_cargoIngreso}"/>
+                        <h:outputText value="#{registroController.selected.cargoIngreso}" title="#{bundle.ViewRegistroTitle_cargoIngreso}"/>
+                        <h:outputText value="#{bundle.ViewRegistroLabel_descripcionIngreso}"/>
+                        <h:outputText value="#{registroController.selected.descripcionIngreso}" title="#{bundle.ViewRegistroTitle_descripcionIngreso}"/>
+                        <h:outputText value="#{bundle.ViewRegistroLabel_cuenta}"/>
+                        <h:outputText value="#{registroController.selected.cuenta}" title="#{bundle.ViewRegistroTitle_cuenta}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="RegistroViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

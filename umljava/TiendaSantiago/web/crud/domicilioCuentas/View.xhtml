@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DomicilioCuentasViewDlg" widgetVar="DomicilioCuentasViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDomicilioCuentasTitle}">
+            <h:form id="DomicilioCuentasViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{domicilioCuentasController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDomicilioCuentasLabel_direccion}"/>
+                        <h:outputText value="#{domicilioCuentasController.selected.direccion}" title="#{bundle.ViewDomicilioCuentasTitle_direccion}"/>
+                        <h:outputText value="#{bundle.ViewDomicilioCuentasLabel_telefono}"/>
+                        <h:outputText value="#{domicilioCuentasController.selected.telefono}" title="#{bundle.ViewDomicilioCuentasTitle_telefono}"/>
+                        <h:outputText value="#{bundle.ViewDomicilioCuentasLabel_barrio}"/>
+                        <h:outputText value="#{domicilioCuentasController.selected.barrio}" title="#{bundle.ViewDomicilioCuentasTitle_barrio}"/>
+                        <h:outputText value="#{bundle.ViewDomicilioCuentasLabel_localidad}"/>
+                        <h:outputText value="#{domicilioCuentasController.selected.localidad}" title="#{bundle.ViewDomicilioCuentasTitle_localidad}"/>
+                        <h:outputText value="#{bundle.ViewDomicilioCuentasLabel_correoPostal}"/>
+                        <h:outputText value="#{domicilioCuentasController.selected.correoPostal}" title="#{bundle.ViewDomicilioCuentasTitle_correoPostal}"/>
+                        <h:outputText value="#{bundle.ViewDomicilioCuentasLabel_cuenta}"/>
+                        <h:outputText value="#{domicilioCuentasController.selected.cuenta}" title="#{bundle.ViewDomicilioCuentasTitle_cuenta}"/>
+                        <h:outputText value="#{bundle.ViewDomicilioCuentasLabel_municipioIdMunicipio}"/>
+                        <h:outputText value="#{domicilioCuentasController.selected.municipioIdMunicipio}" title="#{bundle.ViewDomicilioCuentasTitle_municipioIdMunicipio}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DomicilioCuentasViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

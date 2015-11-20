@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PedidoCreateDlg" widgetVar="PedidoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePedidoTitle}">
+            <h:form id="PedidoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pedidoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePedidoLabel_facturaIdFactura}" for="facturaIdFactura" />
+                        <p:inputText id="facturaIdFactura" value="#{pedidoController.selected.facturaIdFactura}" title="#{bundle.CreatePedidoTitle_facturaIdFactura}" required="true" requiredMessage="#{bundle.CreatePedidoRequiredMessage_facturaIdFactura}"/>
+                        <p:outputLabel value="#{bundle.CreatePedidoLabel_total}" for="total" />
+                        <p:inputText id="total" value="#{pedidoController.selected.total}" title="#{bundle.CreatePedidoTitle_total}" required="true" requiredMessage="#{bundle.CreatePedidoRequiredMessage_total}"/>
+                        <p:outputLabel value="#{bundle.CreatePedidoLabel_subtotal}" for="subtotal" />
+                        <p:inputText id="subtotal" value="#{pedidoController.selected.subtotal}" title="#{bundle.CreatePedidoTitle_subtotal}" required="true" requiredMessage="#{bundle.CreatePedidoRequiredMessage_subtotal}"/>
+                        <p:outputLabel value="#{bundle.CreatePedidoLabel_impuestos}" for="impuestos" />
+                        <p:inputText id="impuestos" value="#{pedidoController.selected.impuestos}" title="#{bundle.CreatePedidoTitle_impuestos}" required="true" requiredMessage="#{bundle.CreatePedidoRequiredMessage_impuestos}"/>
+                        <p:outputLabel value="#{bundle.CreatePedidoLabel_factura}" for="factura" />
+                        <p:selectOneMenu id="factura" value="#{pedidoController.selected.factura}" required="true" requiredMessage="#{bundle.EditPedidoRequiredMessage_factura}">
+                            <f:selectItems value="#{facturaController.itemsAvailableSelectOne}"
+                                           var="facturaItem"
+                                           itemValue="#{facturaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pedidoController.create}" value="#{bundle.Save}" update="display,:PedidoListForm:datalist,:growl" oncomplete="handleSubmit(args,'PedidoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PedidoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

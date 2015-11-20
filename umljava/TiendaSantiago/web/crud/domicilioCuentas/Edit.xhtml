@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DomicilioCuentasEditDlg" widgetVar="DomicilioCuentasEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDomicilioCuentasTitle}">
+            <h:form id="DomicilioCuentasEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{domicilioCuentasController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDomicilioCuentasLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{domicilioCuentasController.selected.direccion}" title="#{bundle.EditDomicilioCuentasTitle_direccion}" />
+                        <p:outputLabel value="#{bundle.EditDomicilioCuentasLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{domicilioCuentasController.selected.telefono}" title="#{bundle.EditDomicilioCuentasTitle_telefono}" />
+                        <p:outputLabel value="#{bundle.EditDomicilioCuentasLabel_barrio}" for="barrio" />
+                        <p:inputText id="barrio" value="#{domicilioCuentasController.selected.barrio}" title="#{bundle.EditDomicilioCuentasTitle_barrio}" />
+                        <p:outputLabel value="#{bundle.EditDomicilioCuentasLabel_localidad}" for="localidad" />
+                        <p:inputText id="localidad" value="#{domicilioCuentasController.selected.localidad}" title="#{bundle.EditDomicilioCuentasTitle_localidad}" />
+                        <p:outputLabel value="#{bundle.EditDomicilioCuentasLabel_correoPostal}" for="correoPostal" />
+                        <p:inputText id="correoPostal" value="#{domicilioCuentasController.selected.correoPostal}" title="#{bundle.EditDomicilioCuentasTitle_correoPostal}" />
+                        <p:outputLabel value="#{bundle.EditDomicilioCuentasLabel_cuenta}" for="cuenta" />
+                        <p:selectOneMenu id="cuenta" value="#{domicilioCuentasController.selected.cuenta}" required="true" requiredMessage="#{bundle.EditDomicilioCuentasRequiredMessage_cuenta}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{cuentaController.itemsAvailableSelectOne}"
+                                           var="cuentaItem"
+                                           itemValue="#{cuentaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDomicilioCuentasLabel_municipioIdMunicipio}" for="municipioIdMunicipio" />
+                        <p:selectOneMenu id="municipioIdMunicipio" value="#{domicilioCuentasController.selected.municipioIdMunicipio}" required="true" requiredMessage="#{bundle.EditDomicilioCuentasRequiredMessage_municipioIdMunicipio}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{municipioController.itemsAvailableSelectOne}"
+                                           var="municipioIdMunicipioItem"
+                                           itemValue="#{municipioIdMunicipioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{domicilioCuentasController.update}" value="#{bundle.Save}" update="display,:DomicilioCuentasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DomicilioCuentasEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DomicilioCuentasEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

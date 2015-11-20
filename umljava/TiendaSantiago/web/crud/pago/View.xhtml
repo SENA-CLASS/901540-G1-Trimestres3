@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PagoViewDlg" widgetVar="PagoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPagoTitle}">
+            <h:form id="PagoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pagoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPagoLabel_facturaIdFactura}"/>
+                        <h:outputText value="#{pagoController.selected.facturaIdFactura}" title="#{bundle.ViewPagoTitle_facturaIdFactura}"/>
+                        <h:outputText value="#{bundle.ViewPagoLabel_tipoPago}"/>
+                        <h:outputText value="#{pagoController.selected.tipoPago}" title="#{bundle.ViewPagoTitle_tipoPago}"/>
+                        <h:outputText value="#{bundle.ViewPagoLabel_numeroCuenta}"/>
+                        <h:outputText value="#{pagoController.selected.numeroCuenta}" title="#{bundle.ViewPagoTitle_numeroCuenta}"/>
+                        <h:outputText value="#{bundle.ViewPagoLabel_numeroTargeta}"/>
+                        <h:outputText value="#{pagoController.selected.numeroTargeta}" title="#{bundle.ViewPagoTitle_numeroTargeta}"/>
+                        <h:outputText value="#{bundle.ViewPagoLabel_factura}"/>
+                        <h:outputText value="#{pagoController.selected.factura}" title="#{bundle.ViewPagoTitle_factura}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PagoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DomicilioProveeCreateDlg" widgetVar="DomicilioProveeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDomicilioProveeTitle}">
+            <h:form id="DomicilioProveeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{domicilioProveeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDomicilioProveeLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{domicilioProveeController.selected.direccion}" title="#{bundle.CreateDomicilioProveeTitle_direccion}" />
+                        <p:outputLabel value="#{bundle.CreateDomicilioProveeLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{domicilioProveeController.selected.telefono}" title="#{bundle.CreateDomicilioProveeTitle_telefono}" />
+                        <p:outputLabel value="#{bundle.CreateDomicilioProveeLabel_barrio}" for="barrio" />
+                        <p:inputText id="barrio" value="#{domicilioProveeController.selected.barrio}" title="#{bundle.CreateDomicilioProveeTitle_barrio}" />
+                        <p:outputLabel value="#{bundle.CreateDomicilioProveeLabel_localidad}" for="localidad" />
+                        <p:inputText id="localidad" value="#{domicilioProveeController.selected.localidad}" title="#{bundle.CreateDomicilioProveeTitle_localidad}" />
+                        <p:outputLabel value="#{bundle.CreateDomicilioProveeLabel_correoPostal}" for="correoPostal" />
+                        <p:inputText id="correoPostal" value="#{domicilioProveeController.selected.correoPostal}" title="#{bundle.CreateDomicilioProveeTitle_correoPostal}" />
+                        <p:outputLabel value="#{bundle.CreateDomicilioProveeLabel_municipioIdMunicipio}" for="municipioIdMunicipio" />
+                        <p:selectOneMenu id="municipioIdMunicipio" value="#{domicilioProveeController.selected.municipioIdMunicipio}" required="true" requiredMessage="#{bundle.EditDomicilioProveeRequiredMessage_municipioIdMunicipio}">
+                            <f:selectItems value="#{municipioController.itemsAvailableSelectOne}"
+                                           var="municipioIdMunicipioItem"
+                                           itemValue="#{municipioIdMunicipioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDomicilioProveeLabel_proveedor}" for="proveedor" />
+                        <p:selectOneMenu id="proveedor" value="#{domicilioProveeController.selected.proveedor}" required="true" requiredMessage="#{bundle.EditDomicilioProveeRequiredMessage_proveedor}">
+                            <f:selectItems value="#{proveedorController.itemsAvailableSelectOne}"
+                                           var="proveedorItem"
+                                           itemValue="#{proveedorItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{domicilioProveeController.create}" value="#{bundle.Save}" update="display,:DomicilioProveeListForm:datalist,:growl" oncomplete="handleSubmit(args,'DomicilioProveeCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DomicilioProveeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

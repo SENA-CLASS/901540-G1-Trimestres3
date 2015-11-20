@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FacturaCreateDlg" widgetVar="FacturaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateFacturaTitle}">
+            <h:form id="FacturaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{facturaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateFacturaLabel_idFactura}" for="idFactura" />
+                        <p:inputText id="idFactura" value="#{facturaController.selected.idFactura}" title="#{bundle.CreateFacturaTitle_idFactura}" required="true" requiredMessage="#{bundle.CreateFacturaRequiredMessage_idFactura}"/>
+                        <p:outputLabel value="#{bundle.CreateFacturaLabel_fechaFactura}" for="fechaFactura" />
+                        <p:calendar id="fechaFactura" pattern="MM/dd/yyyy" value="#{facturaController.selected.fechaFactura}" title="#{bundle.EditFacturaTitle_fechaFactura}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_fechaFactura}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateFacturaLabel_formaPago}" for="formaPago" />
+                        <p:inputText id="formaPago" value="#{facturaController.selected.formaPago}" title="#{bundle.CreateFacturaTitle_formaPago}" />
+                        <p:outputLabel value="#{bundle.CreateFacturaLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{facturaController.selected.estado}" title="#{bundle.CreateFacturaTitle_estado}" required="true" requiredMessage="#{bundle.CreateFacturaRequiredMessage_estado}"/>
+                        <p:outputLabel value="#{bundle.CreateFacturaLabel_pago}" for="pago" />
+                        <p:selectOneMenu id="pago" value="#{facturaController.selected.pago}" >
+                            <f:selectItems value="#{pagoController.itemsAvailableSelectOne}"
+                                           var="pagoItem"
+                                           itemValue="#{pagoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateFacturaLabel_cuenta}" for="cuenta" />
+                        <p:selectOneMenu id="cuenta" value="#{facturaController.selected.cuenta}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_cuenta}">
+                            <f:selectItems value="#{cuentaController.itemsAvailableSelectOne}"
+                                           var="cuentaItem"
+                                           itemValue="#{cuentaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateFacturaLabel_pedido}" for="pedido" />
+                        <p:selectOneMenu id="pedido" value="#{facturaController.selected.pedido}" >
+                            <f:selectItems value="#{pedidoController.itemsAvailableSelectOne}"
+                                           var="pedidoItem"
+                                           itemValue="#{pedidoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{facturaController.create}" value="#{bundle.Save}" update="display,:FacturaListForm:datalist,:growl" oncomplete="handleSubmit(args,'FacturaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FacturaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

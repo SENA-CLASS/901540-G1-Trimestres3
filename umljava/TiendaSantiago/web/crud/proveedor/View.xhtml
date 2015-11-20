@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProveedorViewDlg" widgetVar="ProveedorViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewProveedorTitle}">
+            <h:form id="ProveedorViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{proveedorController.selected != null}">
+                        <h:outputText value="#{bundle.ViewProveedorLabel_proveedorPK_numDocumento}"/>
+                        <h:outputText value="#{proveedorController.selected.proveedorPK.numDocumento}" title="#{bundle.ViewProveedorTitle_proveedorPK_numDocumento}"/>
+                        <h:outputText value="#{bundle.ViewProveedorLabel_nombreProveedor}"/>
+                        <h:outputText value="#{proveedorController.selected.nombreProveedor}" title="#{bundle.ViewProveedorTitle_nombreProveedor}"/>
+                        <h:outputText value="#{bundle.ViewProveedorLabel_correo}"/>
+                        <h:outputText value="#{proveedorController.selected.correo}" title="#{bundle.ViewProveedorTitle_correo}"/>
+                        <h:outputText value="#{bundle.ViewProveedorLabel_domicilioProvee}"/>
+                        <h:outputText value="#{proveedorController.selected.domicilioProvee}" title="#{bundle.ViewProveedorTitle_domicilioProvee}"/>
+                        <h:outputText value="#{bundle.ViewProveedorLabel_tipoDocumento}"/>
+                        <h:outputText value="#{proveedorController.selected.tipoDocumento}" title="#{bundle.ViewProveedorTitle_tipoDocumento}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ProveedorViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

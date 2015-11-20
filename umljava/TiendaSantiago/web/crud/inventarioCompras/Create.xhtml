@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InventarioComprasCreateDlg" widgetVar="InventarioComprasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateInventarioComprasTitle}">
+            <h:form id="InventarioComprasCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{inventarioComprasController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateInventarioComprasLabel_inventarioComprasPK_idInventario}" for="inventarioComprasPK_idInventario" />
+                        <p:inputText id="inventarioComprasPK_idInventario" value="#{inventarioComprasController.selected.inventarioComprasPK.idInventario}" title="#{bundle.CreateInventarioComprasTitle_inventarioComprasPK_idInventario}" required="true" requiredMessage="#{bundle.CreateInventarioComprasRequiredMessage_inventarioComprasPK_idInventario}"/>
+                        <p:outputLabel value="#{bundle.CreateInventarioComprasLabel_fechaCompra}" for="fechaCompra" />
+                        <p:calendar id="fechaCompra" pattern="MM/dd/yyyy" value="#{inventarioComprasController.selected.fechaCompra}" title="#{bundle.EditInventarioComprasTitle_fechaCompra}" required="true" requiredMessage="#{bundle.EditInventarioComprasRequiredMessage_fechaCompra}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateInventarioComprasLabel_canProComprado}" for="canProComprado" />
+                        <p:inputText id="canProComprado" value="#{inventarioComprasController.selected.canProComprado}" title="#{bundle.CreateInventarioComprasTitle_canProComprado}" />
+                        <p:outputLabel value="#{bundle.CreateInventarioComprasLabel_precioPorMayor}" for="precioPorMayor" />
+                        <p:inputText id="precioPorMayor" value="#{inventarioComprasController.selected.precioPorMayor}" title="#{bundle.CreateInventarioComprasTitle_precioPorMayor}" />
+                        <p:outputLabel value="#{bundle.CreateInventarioComprasLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{inventarioComprasController.selected.observaciones}" title="#{bundle.CreateInventarioComprasTitle_observaciones}" />
+                        <p:outputLabel value="#{bundle.CreateInventarioComprasLabel_producto}" for="producto" />
+                        <p:selectOneMenu id="producto" value="#{inventarioComprasController.selected.producto}" required="true" requiredMessage="#{bundle.EditInventarioComprasRequiredMessage_producto}">
+                            <f:selectItems value="#{productoController.itemsAvailableSelectOne}"
+                                           var="productoItem"
+                                           itemValue="#{productoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateInventarioComprasLabel_proveedor}" for="proveedor" />
+                        <p:selectOneMenu id="proveedor" value="#{inventarioComprasController.selected.proveedor}" required="true" requiredMessage="#{bundle.EditInventarioComprasRequiredMessage_proveedor}">
+                            <f:selectItems value="#{proveedorController.itemsAvailableSelectOne}"
+                                           var="proveedorItem"
+                                           itemValue="#{proveedorItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{inventarioComprasController.create}" value="#{bundle.Save}" update="display,:InventarioComprasListForm:datalist,:growl" oncomplete="handleSubmit(args,'InventarioComprasCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InventarioComprasCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

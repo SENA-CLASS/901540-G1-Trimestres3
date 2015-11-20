@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemCarritoEditDlg" widgetVar="ItemCarritoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditItemCarritoTitle}">
+            <h:form id="ItemCarritoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{itemCarritoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditItemCarritoLabel_cantidad}" for="cantidad" />
+                        <p:inputText id="cantidad" value="#{itemCarritoController.selected.cantidad}" title="#{bundle.EditItemCarritoTitle_cantidad}" />
+                        <p:outputLabel value="#{bundle.EditItemCarritoLabel_valorUnitario}" for="valorUnitario" />
+                        <p:inputText id="valorUnitario" value="#{itemCarritoController.selected.valorUnitario}" title="#{bundle.EditItemCarritoTitle_valorUnitario}" />
+                        <p:outputLabel value="#{bundle.EditItemCarritoLabel_valorTotal}" for="valorTotal" />
+                        <p:inputText id="valorTotal" value="#{itemCarritoController.selected.valorTotal}" title="#{bundle.EditItemCarritoTitle_valorTotal}" />
+                        <p:outputLabel value="#{bundle.EditItemCarritoLabel_carritoCompras}" for="carritoCompras" />
+                        <p:selectOneMenu id="carritoCompras" value="#{itemCarritoController.selected.carritoCompras}" required="true" requiredMessage="#{bundle.EditItemCarritoRequiredMessage_carritoCompras}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{carritoComprasController.itemsAvailableSelectOne}"
+                                           var="carritoComprasItem"
+                                           itemValue="#{carritoComprasItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditItemCarritoLabel_producto}" for="producto" />
+                        <p:selectOneMenu id="producto" value="#{itemCarritoController.selected.producto}" required="true" requiredMessage="#{bundle.EditItemCarritoRequiredMessage_producto}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{productoController.itemsAvailableSelectOne}"
+                                           var="productoItem"
+                                           itemValue="#{productoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{itemCarritoController.update}" value="#{bundle.Save}" update="display,:ItemCarritoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ItemCarritoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ItemCarritoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FacturaEditDlg" widgetVar="FacturaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditFacturaTitle}">
+            <h:form id="FacturaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{facturaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditFacturaLabel_idFactura}" for="idFactura" />
+                        <p:inputText id="idFactura" value="#{facturaController.selected.idFactura}" title="#{bundle.EditFacturaTitle_idFactura}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_idFactura}"/>
+                        <p:outputLabel value="#{bundle.EditFacturaLabel_fechaFactura}" for="fechaFactura" />
+                        <p:calendar id="fechaFactura" pattern="MM/dd/yyyy" value="#{facturaController.selected.fechaFactura}" title="#{bundle.EditFacturaTitle_fechaFactura}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_fechaFactura}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditFacturaLabel_formaPago}" for="formaPago" />
+                        <p:inputText id="formaPago" value="#{facturaController.selected.formaPago}" title="#{bundle.EditFacturaTitle_formaPago}" />
+                        <p:outputLabel value="#{bundle.EditFacturaLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{facturaController.selected.estado}" title="#{bundle.EditFacturaTitle_estado}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_estado}"/>
+                        <p:outputLabel value="#{bundle.EditFacturaLabel_pago}" for="pago" />
+                        <p:selectOneMenu id="pago" value="#{facturaController.selected.pago}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{pagoController.itemsAvailableSelectOne}"
+                                           var="pagoItem"
+                                           itemValue="#{pagoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditFacturaLabel_cuenta}" for="cuenta" />
+                        <p:selectOneMenu id="cuenta" value="#{facturaController.selected.cuenta}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_cuenta}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{cuentaController.itemsAvailableSelectOne}"
+                                           var="cuentaItem"
+                                           itemValue="#{cuentaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditFacturaLabel_pedido}" for="pedido" />
+                        <p:selectOneMenu id="pedido" value="#{facturaController.selected.pedido}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{pedidoController.itemsAvailableSelectOne}"
+                                           var="pedidoItem"
+                                           itemValue="#{pedidoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{facturaController.update}" value="#{bundle.Save}" update="display,:FacturaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FacturaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FacturaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CarritoComprasCreateDlg" widgetVar="CarritoComprasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCarritoComprasTitle}">
+            <h:form id="CarritoComprasCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{carritoComprasController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCarritoComprasLabel_idCarrito}" for="idCarrito" />
+                        <p:inputText id="idCarrito" value="#{carritoComprasController.selected.idCarrito}" title="#{bundle.CreateCarritoComprasTitle_idCarrito}" required="true" requiredMessage="#{bundle.CreateCarritoComprasRequiredMessage_idCarrito}"/>
+                        <p:outputLabel value="#{bundle.CreateCarritoComprasLabel_total}" for="total" />
+                        <p:inputText id="total" value="#{carritoComprasController.selected.total}" title="#{bundle.CreateCarritoComprasTitle_total}" required="true" requiredMessage="#{bundle.CreateCarritoComprasRequiredMessage_total}"/>
+                        <p:outputLabel value="#{bundle.CreateCarritoComprasLabel_subtotal}" for="subtotal" />
+                        <p:inputText id="subtotal" value="#{carritoComprasController.selected.subtotal}" title="#{bundle.CreateCarritoComprasTitle_subtotal}" required="true" requiredMessage="#{bundle.CreateCarritoComprasRequiredMessage_subtotal}"/>
+                        <p:outputLabel value="#{bundle.CreateCarritoComprasLabel_impuestos}" for="impuestos" />
+                        <p:inputText id="impuestos" value="#{carritoComprasController.selected.impuestos}" title="#{bundle.CreateCarritoComprasTitle_impuestos}" required="true" requiredMessage="#{bundle.CreateCarritoComprasRequiredMessage_impuestos}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{carritoComprasController.create}" value="#{bundle.Save}" update="display,:CarritoComprasListForm:datalist,:growl" oncomplete="handleSubmit(args,'CarritoComprasCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CarritoComprasCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemCarritoViewDlg" widgetVar="ItemCarritoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewItemCarritoTitle}">
+            <h:form id="ItemCarritoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{itemCarritoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewItemCarritoLabel_cantidad}"/>
+                        <h:outputText value="#{itemCarritoController.selected.cantidad}" title="#{bundle.ViewItemCarritoTitle_cantidad}"/>
+                        <h:outputText value="#{bundle.ViewItemCarritoLabel_valorUnitario}"/>
+                        <h:outputText value="#{itemCarritoController.selected.valorUnitario}" title="#{bundle.ViewItemCarritoTitle_valorUnitario}"/>
+                        <h:outputText value="#{bundle.ViewItemCarritoLabel_valorTotal}"/>
+                        <h:outputText value="#{itemCarritoController.selected.valorTotal}" title="#{bundle.ViewItemCarritoTitle_valorTotal}"/>
+                        <h:outputText value="#{bundle.ViewItemCarritoLabel_carritoCompras}"/>
+                        <h:outputText value="#{itemCarritoController.selected.carritoCompras}" title="#{bundle.ViewItemCarritoTitle_carritoCompras}"/>
+                        <h:outputText value="#{bundle.ViewItemCarritoLabel_producto}"/>
+                        <h:outputText value="#{itemCarritoController.selected.producto}" title="#{bundle.ViewItemCarritoTitle_producto}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ItemCarritoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

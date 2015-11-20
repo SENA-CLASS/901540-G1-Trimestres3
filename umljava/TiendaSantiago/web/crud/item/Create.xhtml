@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemCreateDlg" widgetVar="ItemCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateItemTitle}">
+            <h:form id="ItemCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{itemController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateItemLabel_cantidad}" for="cantidad" />
+                        <p:inputText id="cantidad" value="#{itemController.selected.cantidad}" title="#{bundle.CreateItemTitle_cantidad}" />
+                        <p:outputLabel value="#{bundle.CreateItemLabel_costoUnitario}" for="costoUnitario" />
+                        <p:inputText id="costoUnitario" value="#{itemController.selected.costoUnitario}" title="#{bundle.CreateItemTitle_costoUnitario}" />
+                        <p:outputLabel value="#{bundle.CreateItemLabel_costoTotal}" for="costoTotal" />
+                        <p:inputText id="costoTotal" value="#{itemController.selected.costoTotal}" title="#{bundle.CreateItemTitle_costoTotal}" />
+                        <p:outputLabel value="#{bundle.CreateItemLabel_pedido}" for="pedido" />
+                        <p:selectOneMenu id="pedido" value="#{itemController.selected.pedido}" required="true" requiredMessage="#{bundle.EditItemRequiredMessage_pedido}">
+                            <f:selectItems value="#{pedidoController.itemsAvailableSelectOne}"
+                                           var="pedidoItem"
+                                           itemValue="#{pedidoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateItemLabel_producto}" for="producto" />
+                        <p:selectOneMenu id="producto" value="#{itemController.selected.producto}" required="true" requiredMessage="#{bundle.EditItemRequiredMessage_producto}">
+                            <f:selectItems value="#{productoController.itemsAvailableSelectOne}"
+                                           var="productoItem"
+                                           itemValue="#{productoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{itemController.create}" value="#{bundle.Save}" update="display,:ItemListForm:datalist,:growl" oncomplete="handleSubmit(args,'ItemCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ItemCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

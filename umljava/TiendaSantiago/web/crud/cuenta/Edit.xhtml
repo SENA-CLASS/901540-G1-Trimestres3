@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CuentaEditDlg" widgetVar="CuentaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCuentaTitle}">
+            <h:form id="CuentaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cuentaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCuentaLabel_cuentaPK_numeroDocumento}" for="cuentaPK_numeroDocumento" />
+                        <p:inputText id="cuentaPK_numeroDocumento" value="#{cuentaController.selected.cuentaPK.numeroDocumento}" title="#{bundle.EditCuentaTitle_cuentaPK_numeroDocumento}" required="true" requiredMessage="#{bundle.EditCuentaRequiredMessage_cuentaPK_numeroDocumento}"/>
+                        <p:outputLabel value="#{bundle.EditCuentaLabel_primerNombre}" for="primerNombre" />
+                        <p:inputText id="primerNombre" value="#{cuentaController.selected.primerNombre}" title="#{bundle.EditCuentaTitle_primerNombre}" required="true" requiredMessage="#{bundle.EditCuentaRequiredMessage_primerNombre}"/>
+                        <p:outputLabel value="#{bundle.EditCuentaLabel_segunroNombre}" for="segunroNombre" />
+                        <p:inputText id="segunroNombre" value="#{cuentaController.selected.segunroNombre}" title="#{bundle.EditCuentaTitle_segunroNombre}" />
+                        <p:outputLabel value="#{bundle.EditCuentaLabel_primerApellido}" for="primerApellido" />
+                        <p:inputText id="primerApellido" value="#{cuentaController.selected.primerApellido}" title="#{bundle.EditCuentaTitle_primerApellido}" required="true" requiredMessage="#{bundle.EditCuentaRequiredMessage_primerApellido}"/>
+                        <p:outputLabel value="#{bundle.EditCuentaLabel_segundoApellido}" for="segundoApellido" />
+                        <p:inputText id="segundoApellido" value="#{cuentaController.selected.segundoApellido}" title="#{bundle.EditCuentaTitle_segundoApellido}" />
+                        <p:outputLabel value="#{bundle.EditCuentaLabel_tipoDocumento}" for="tipoDocumento" />
+                        <p:selectOneMenu id="tipoDocumento" value="#{cuentaController.selected.tipoDocumento}" required="true" requiredMessage="#{bundle.EditCuentaRequiredMessage_tipoDocumento}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoDocumentoController.itemsAvailableSelectOne}"
+                                           var="tipoDocumentoItem"
+                                           itemValue="#{tipoDocumentoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditCuentaLabel_usuarioIdUsuario}" for="usuarioIdUsuario" />
+                        <p:selectOneMenu id="usuarioIdUsuario" value="#{cuentaController.selected.usuarioIdUsuario}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="usuarioIdUsuarioItem"
+                                           itemValue="#{usuarioIdUsuarioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditCuentaLabel_domicilioCuentas}" for="domicilioCuentas" />
+                        <p:selectOneMenu id="domicilioCuentas" value="#{cuentaController.selected.domicilioCuentas}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{domicilioCuentasController.itemsAvailableSelectOne}"
+                                           var="domicilioCuentasItem"
+                                           itemValue="#{domicilioCuentasItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cuentaController.update}" value="#{bundle.Save}" update="display,:CuentaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CuentaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CuentaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InventarioComprasViewDlg" widgetVar="InventarioComprasViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewInventarioComprasTitle}">
+            <h:form id="InventarioComprasViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{inventarioComprasController.selected != null}">
+                        <h:outputText value="#{bundle.ViewInventarioComprasLabel_inventarioComprasPK_idInventario}"/>
+                        <h:outputText value="#{inventarioComprasController.selected.inventarioComprasPK.idInventario}" title="#{bundle.ViewInventarioComprasTitle_inventarioComprasPK_idInventario}"/>
+                        <h:outputText value="#{bundle.ViewInventarioComprasLabel_fechaCompra}"/>
+                        <h:outputText value="#{inventarioComprasController.selected.fechaCompra}" title="#{bundle.ViewInventarioComprasTitle_fechaCompra}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewInventarioComprasLabel_canProComprado}"/>
+                        <h:outputText value="#{inventarioComprasController.selected.canProComprado}" title="#{bundle.ViewInventarioComprasTitle_canProComprado}"/>
+                        <h:outputText value="#{bundle.ViewInventarioComprasLabel_precioPorMayor}"/>
+                        <h:outputText value="#{inventarioComprasController.selected.precioPorMayor}" title="#{bundle.ViewInventarioComprasTitle_precioPorMayor}"/>
+                        <h:outputText value="#{bundle.ViewInventarioComprasLabel_observaciones}"/>
+                        <h:outputText value="#{inventarioComprasController.selected.observaciones}" title="#{bundle.ViewInventarioComprasTitle_observaciones}"/>
+                        <h:outputText value="#{bundle.ViewInventarioComprasLabel_producto}"/>
+                        <h:outputText value="#{inventarioComprasController.selected.producto}" title="#{bundle.ViewInventarioComprasTitle_producto}"/>
+                        <h:outputText value="#{bundle.ViewInventarioComprasLabel_proveedor}"/>
+                        <h:outputText value="#{inventarioComprasController.selected.proveedor}" title="#{bundle.ViewInventarioComprasTitle_proveedor}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="InventarioComprasViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MunicipioViewDlg" widgetVar="MunicipioViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMunicipioTitle}">
+            <h:form id="MunicipioViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{municipioController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMunicipioLabel_idMunicipio}"/>
+                        <h:outputText value="#{municipioController.selected.idMunicipio}" title="#{bundle.ViewMunicipioTitle_idMunicipio}"/>
+                        <h:outputText value="#{bundle.ViewMunicipioLabel_nomnbreMunicipio}"/>
+                        <h:outputText value="#{municipioController.selected.nomnbreMunicipio}" title="#{bundle.ViewMunicipioTitle_nomnbreMunicipio}"/>
+                        <h:outputText value="#{bundle.ViewMunicipioLabel_departamentoIdDepartamento}"/>
+                        <h:outputText value="#{municipioController.selected.departamentoIdDepartamento}" title="#{bundle.ViewMunicipioTitle_departamentoIdDepartamento}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MunicipioViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
