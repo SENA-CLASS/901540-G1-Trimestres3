@@ -47,7 +47,7 @@ public class CargueArchivo {
                        break;
                        case 2:
                        pt.setSegundoNombre(t);
-                       break;
+             
                        case 3:
                        pt.setPrimerApellido(t);
                        break;
